@@ -55,7 +55,8 @@ var radius = 100;
 var canvas = document.getElementById('main');
 var now = new Date()
 drawOutline(canvas, radius);
-drawLineForTime(canvas, radius, now);
+
+drawTimeLine(canvas, radius, now);
 navigator.geolocation.getCurrentPosition( gotLocation, noLocation, { timeout: 60000, enableHighAccuracy: false } );
 
 //Location deciders
@@ -89,8 +90,8 @@ function drawOutline(canvas, radius){
   ctx.stroke();
 }
 
-function drawLineForTime(canvas, radius, time){
-  drawLineForFraction(canvas, radius, fractionOfDay(time) );
+function drawTimeLine(canvas, radius, time){
+  drawLineForTime(canvas, radius, time, 3)
 }
 
 function drawSunLines(canvas, date, latitude, longitude, radius){
@@ -101,8 +102,14 @@ function drawSunLines(canvas, date, latitude, longitude, radius){
 }
 
 //private functions
-function drawLineForFraction(canvas, radius, fraction){
+
+function drawLineForTime(canvas, radius, time, lineWidth = 1){
+  drawLineForFraction(canvas, radius, fractionOfDay(time), lineWidth );
+}
+
+function drawLineForFraction(canvas, radius, fraction, lineWidth = 1){
   var ctx = canvas.getContext("2d");
+  ctx.lineWidth = lineWidth;
   var center = getCenter(canvas)
   ctx.beginPath();
   ctx.moveTo(center.x,center.y);
