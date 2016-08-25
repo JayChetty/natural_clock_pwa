@@ -12,10 +12,11 @@ var isLocalhost = Boolean(window.location.hostname === 'localhost' ||
 );
 
 
-// if ('serviceWorker' in navigator &&
-//     (window.location.protocol === 'https:' || isLocalhost)) {
-//   navigator.serviceWorker.register('service-worker.js')
-//   .then(function(registration) {
+if ('serviceWorker' in navigator &&
+    (window.location.protocol === 'https:' || isLocalhost)) {
+  navigator.serviceWorker.register('service-worker.js')
+  .then(function(registration) {
+    console.log('service worker registered')
 //     // updatefound is fired if service-worker.js changes.
 //     registration.onupdatefound = function() {
 //       // updatefound is also fired the very first time the SW is installed,
@@ -46,10 +47,10 @@ var isLocalhost = Boolean(window.location.hostname === 'localhost' ||
 //         };
 //       }
 //     };
-//   }).catch(function(e) {
-//     console.error('Error during service worker registration:', e);
-//   });
-// }
+  }).catch(function(e) {
+    console.error('Error during service worker registration:', e);
+  });
+}
 
 var radius = 100;
 var canvas = document.getElementById('main');
